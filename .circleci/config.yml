@@ -1,0 +1,13 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: opiskull/dotnet-codacy
+#      - image: microsoft/dotnet:2.2-sdk-alpine
+    steps:
+      - checkout
+      - run: dotnet restore
+      - run: dotnet build
+      - run: dotnet test /p:CoverletOutputFormat=cobertura /p:CollectCoverage=true
+      - run: for FILE in `find . -name coverage.cobertura.xml`; do java -jar ${JAVA_HOME}/bin/codacy-coverage-reporter.jar report -l CSharp -r "$FILE"; done
+
