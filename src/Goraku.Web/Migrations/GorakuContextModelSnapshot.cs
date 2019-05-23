@@ -39,6 +39,27 @@ namespace Goraku.Web.Migrations
 
                     b.ToTable("Animes");
                 });
+
+            modelBuilder.Entity("Goraku.Web.Models.Manga", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<string>("Data")
+                        .HasColumnType("jsonb");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<string>("ModifiedBy");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Mangas");
+                });
 #pragma warning restore 612, 618
         }
     }

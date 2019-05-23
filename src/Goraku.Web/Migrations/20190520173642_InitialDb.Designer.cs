@@ -10,8 +10,8 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 namespace Goraku.Web.Migrations
 {
     [DbContext(typeof(GorakuContext))]
-    [Migration("20190519204850_initial")]
-    partial class initial
+    [Migration("20190520173642_InitialDb")]
+    partial class InitialDb
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -40,6 +40,27 @@ namespace Goraku.Web.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Animes");
+                });
+
+            modelBuilder.Entity("Goraku.Web.Models.Manga", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("Created");
+
+                    b.Property<string>("CreatedBy");
+
+                    b.Property<string>("Data")
+                        .HasColumnType("jsonb");
+
+                    b.Property<DateTime>("Modified");
+
+                    b.Property<string>("ModifiedBy");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Mangas");
                 });
 #pragma warning restore 612, 618
         }
